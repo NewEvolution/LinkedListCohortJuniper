@@ -56,7 +56,7 @@ namespace SinglyLinkedLists
 
         public override string ToString()
         {
-            return Value.ToString();
+            return value.ToString();
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
