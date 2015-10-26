@@ -16,7 +16,17 @@ namespace SinglyLinkedLists
         public SinglyLinkedListNode Next
         {
             get { return next; }
-            set { next = value; }
+            set
+            {
+                if(value == this)
+                {
+                    throw new ArgumentException();
+                }
+                else
+                {
+                    next = value;
+                }
+            }
         }
 
         private string value;
@@ -42,6 +52,11 @@ namespace SinglyLinkedLists
             this.value = value;
             // Used by the visualizer:
             allNodes.Add(this);
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
