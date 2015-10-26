@@ -37,7 +37,11 @@ namespace SinglyLinkedLists
 
         public void AddLast(string value)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode node = new SinglyLinkedListNode(value);
+            if (first == null)
+            {
+                first = node.ToString();
+            }
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
@@ -51,9 +55,10 @@ namespace SinglyLinkedLists
             throw new NotImplementedException();
         }
 
+        private string first;
         public string First()
         {
-            throw new NotImplementedException();
+            return first;
         }
 
         public int IndexOf(string value)
