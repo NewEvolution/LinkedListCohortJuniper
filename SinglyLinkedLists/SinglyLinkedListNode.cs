@@ -67,7 +67,7 @@ namespace SinglyLinkedLists
 
         public bool IsLast()
         {
-            throw new NotImplementedException();
+            return next == null ? true : false;
         }
     }
 }
