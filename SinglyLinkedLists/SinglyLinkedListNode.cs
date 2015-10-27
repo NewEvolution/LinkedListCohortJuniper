@@ -15,17 +15,17 @@ namespace SinglyLinkedLists
         private SinglyLinkedListNode next;
         public SinglyLinkedListNode Next
         {
-            get { return next; }
+            get
+            {
+                return next;
+            }
             set
             {
-                if(value == this)
+                if(ReferenceEquals(value, this))
                 {
                     throw new ArgumentException();
                 }
-                else
-                {
-                    next = value;
-                }
+                next = value;
             }
         }
 
@@ -33,6 +33,24 @@ namespace SinglyLinkedLists
         public string Value 
         {
             get { return value; }
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            SinglyLinkedListNode sent = obj as SinglyLinkedListNode;
+            if((object)sent == null)
+            {
+                return false;
+            }
+            if (sent.Value == value)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static bool operator <(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
