@@ -37,10 +37,19 @@ namespace SinglyLinkedLists
 
         public void AddLast(string value)
         {
-            SinglyLinkedListNode node = new SinglyLinkedListNode(value);
-            if (first == null)
+            SinglyLinkedListNode newNode = new SinglyLinkedListNode(value);
+            if (firstNode == null)
             {
-                first = node.ToString();
+                firstNode = newNode;
+            }
+            else
+            {
+                SinglyLinkedListNode testNode = firstNode;
+                while (testNode.Next != null)
+                {
+                    testNode = testNode.Next;
+                }
+                testNode.Next = newNode;
             }
         }
 
@@ -55,10 +64,17 @@ namespace SinglyLinkedLists
             throw new NotImplementedException();
         }
 
-        private string first;
+        private SinglyLinkedListNode firstNode;
         public string First()
         {
-            return first;
+            if (firstNode == null)
+            {
+                return null;
+            }
+            else
+            {
+                return firstNode.Value;
+            }
         }
 
         public int IndexOf(string value)

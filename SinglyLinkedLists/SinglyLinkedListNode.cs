@@ -42,7 +42,7 @@ namespace SinglyLinkedLists
                 return false;
             }
             SinglyLinkedListNode sent = obj as SinglyLinkedListNode;
-            if((object)sent == null)
+            if(sent == null)
             {
                 return false;
             }
@@ -80,7 +80,16 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/system.icomparable.compareto.aspx
         public int CompareTo(Object obj)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode testNode = obj as SinglyLinkedListNode;
+            while (testNode.Next != null)
+            {
+                if (testNode.Next == this)
+                {
+                    return 1;
+                }
+                testNode = testNode.Next;
+            }
+            return -1;
         }
 
         public bool IsLast()
