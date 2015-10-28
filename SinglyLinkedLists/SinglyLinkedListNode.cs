@@ -37,20 +37,19 @@ namespace SinglyLinkedLists
 
         public override bool Equals(object obj)
         {
-            if (obj == null)
-            {
-                return false;
-            }
             SinglyLinkedListNode sent = obj as SinglyLinkedListNode;
-            if(sent == null)
+            if (sent == null)
             {
                 return false;
             }
-            if (sent.Value == value)
+            else if (sent.Value == value)
             {
                 return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         public static bool operator <(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
@@ -81,15 +80,7 @@ namespace SinglyLinkedLists
         public int CompareTo(Object obj)
         {
             SinglyLinkedListNode testNode = obj as SinglyLinkedListNode;
-            while (testNode.Next != null)
-            {
-                if (testNode.Next == this)
-                {
-                    return 1;
-                }
-                testNode = testNode.Next;
-            }
-            return -1;
+            return testNode == null ? -1 : value.CompareTo(testNode.Value);
         }
 
         public bool IsLast()
