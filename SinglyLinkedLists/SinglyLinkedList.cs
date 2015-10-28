@@ -44,13 +44,19 @@ namespace SinglyLinkedLists
             }
             else
             {
-                SinglyLinkedListNode testNode = firstNode;
-                while (testNode.Next != null)
-                {
-                    testNode = testNode.Next;
-                }
-                testNode.Next = newNode;
+                SinglyLinkedListNode currentNode = LastNode();
+                currentNode.Next = newNode;
             }
+        }
+
+        private SinglyLinkedListNode LastNode()
+        {
+            SinglyLinkedListNode currentNode = firstNode;
+            while (!currentNode.IsLast())
+            {
+                currentNode = currentNode.Next;
+            }
+            return currentNode;
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
@@ -62,21 +68,19 @@ namespace SinglyLinkedLists
         public string ElementAt(int index)
         {
             SinglyLinkedListNode currentNode = firstNode;
-            int currentIndex = 0;
-            if (currentNode == null)
+            for (int i = 0; i <= index; i++)
             {
-                throw new ArgumentOutOfRangeException();
-            }
-            while (currentIndex < index)
-            {
-                if (currentNode.IsLast())
+                if (currentNode == null)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
+                if (i == index)
+                {
+                    return currentNode.Value.ToString();
+                }
                 currentNode = currentNode.Next;
-                currentIndex++;
             }
-            return currentNode.Value.ToString();
+            throw new ArgumentOutOfRangeException();
         }
 
         private SinglyLinkedListNode firstNode;
@@ -100,7 +104,15 @@ namespace SinglyLinkedLists
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
         public string Last()
         {
-            throw new NotImplementedException();
+            if (firstNode == null)
+            {
+                return null;
+            }
+            else
+            {
+                SinglyLinkedListNode currentNode = LastNode();
+                return currentNode.Value.ToString();
+            }
         }
 
         public void Remove(string value)
@@ -113,9 +125,36 @@ namespace SinglyLinkedLists
             throw new NotImplementedException();
         }
 
+        public override string ToString()
+        {
+            string builtString = " ";
+            if (firstNode != null)
+            {
+                SinglyLinkedListNode testNode = firstNode;
+                while (!testNode.IsLast())
+                {
+                    builtString += "\"" + testNode.Value.ToString() + "\", ";
+                    testNode = testNode.Next;
+                }
+                builtString += "\"" + testNode.Value.ToString() + "\" ";
+            }
+            return "{" + builtString + "}";
+        }
+
         public string[] ToArray()
         {
-            throw new NotImplementedException();
+            List<string> strung = new List<string> { };
+            if (firstNode != null)
+            {
+                SinglyLinkedListNode testNode = firstNode;
+                while (!testNode.IsLast())
+                {
+                    strung.Add(testNode.Value.ToString());
+                    testNode = testNode.Next;
+                }
+                strung.Add(testNode.Value.ToString());
+            }
+            return strung.ToArray();
         }
     }
 }
