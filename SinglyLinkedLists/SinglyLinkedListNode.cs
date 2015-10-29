@@ -38,18 +38,12 @@ namespace SinglyLinkedLists
         public override bool Equals(object obj)
         {
             SinglyLinkedListNode sent = obj as SinglyLinkedListNode;
-            if (sent == null)
-            {
-                return false;
-            }
-            else if (sent.Value == value)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return sent == null ? false : sent.Value == value;
+        }
+
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
         }
 
         public static bool operator <(SinglyLinkedListNode node1, SinglyLinkedListNode node2)
@@ -85,7 +79,7 @@ namespace SinglyLinkedLists
 
         public bool IsLast()
         {
-            return next == null ? true : false;
+            return next == null;
         }
     }
 }

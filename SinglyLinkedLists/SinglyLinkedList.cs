@@ -62,11 +62,35 @@ namespace SinglyLinkedLists
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
         public int Count()
         {
-            throw new NotImplementedException();
+            int count = 0;
+            SinglyLinkedListNode currentNode = firstNode;
+            if (currentNode == null)
+            {
+                return count;
+            }
+            else
+            {
+                while (!currentNode.IsLast())
+                {
+                    currentNode = currentNode.Next;
+                    count++;
+                }
+                count++;
+            }
+            return count;
         }
 
         public string ElementAt(int index)
         {
+            if (index < 0)
+            {
+                int count = Count();
+                index = index + count;
+                if (index < 0)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+            }
             SinglyLinkedListNode currentNode = firstNode;
             for (int i = 0; i <= index; i++)
             {
@@ -143,18 +167,9 @@ namespace SinglyLinkedLists
 
         public string[] ToArray()
         {
-            List<string> strung = new List<string> { };
-            if (firstNode != null)
-            {
-                SinglyLinkedListNode testNode = firstNode;
-                while (!testNode.IsLast())
-                {
-                    strung.Add(testNode.Value.ToString());
-                    testNode = testNode.Next;
-                }
-                strung.Add(testNode.Value.ToString());
-            }
-            return strung.ToArray();
+            string builtString = ToString();
+            string[] delimiters = new string[] { "{ \"", "\", \"", "\" }", "{ }" };
+            return builtString.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
         }
     }
 }
