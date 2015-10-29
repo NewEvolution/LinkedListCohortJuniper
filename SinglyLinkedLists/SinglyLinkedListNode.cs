@@ -33,6 +33,7 @@ namespace SinglyLinkedLists
         public string Value 
         {
             get { return value; }
+            set { this.value = value; }
         }
 
         public override bool Equals(object obj)
@@ -60,7 +61,7 @@ namespace SinglyLinkedLists
 
         public SinglyLinkedListNode(string value)
         {
-            this.value = value;
+            Value = value;
             // Used by the visualizer:
             allNodes.Add(this);
         }
@@ -74,7 +75,7 @@ namespace SinglyLinkedLists
         public int CompareTo(Object obj)
         {
             SinglyLinkedListNode testNode = obj as SinglyLinkedListNode;
-            return testNode == null ? -1 : value.CompareTo(testNode.Value);
+            return testNode == null ? 1 : value.CompareTo(testNode.Value);
         }
 
         public bool IsLast()

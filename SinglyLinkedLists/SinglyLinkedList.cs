@@ -15,24 +15,48 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/aa691335(v=vs.71).aspx
         public SinglyLinkedList(params object[] values)
         {
-            throw new NotImplementedException();
+            foreach (string nodeValue in values)
+            {
+                AddLast(nodeValue);
+            }
         }
 
         // READ: http://msdn.microsoft.com/en-us/library/6x16t2tx.aspx
         public string this[int i]
         {
-            get { throw new NotImplementedException(); }
-            set { throw new NotImplementedException(); }
+            get { return ElementAt(i); }
+            set { NodeAt(i).Value = value; }
         }
 
         public void AddAfter(string existingValue, string value)
         {
-            throw new NotImplementedException();
+            string error = "The specified value was not found in the list.";
+            SinglyLinkedListNode testNode = firstNode;
+            while (true)
+            {
+                if (testNode == null)
+                {
+                    throw new ArgumentException(error);
+                }
+                else if (testNode.Value == existingValue)
+                {
+                    SinglyLinkedListNode newNode = new SinglyLinkedListNode(value);
+                    if (!testNode.IsLast())
+                    {
+                        newNode.Next = testNode.Next;
+                    }
+                    testNode.Next = newNode;
+                    break;
+                }
+                testNode = testNode.Next;
+            }
         }
 
         public void AddFirst(string value)
         {
-            throw new NotImplementedException();
+            SinglyLinkedListNode newNode = new SinglyLinkedListNode(value);
+            newNode.Next = firstNode;
+            firstNode = newNode;
         }
 
         public void AddLast(string value)
@@ -91,6 +115,19 @@ namespace SinglyLinkedLists
                     throw new ArgumentOutOfRangeException();
                 }
             }
+            string nodeValue = NodeAt(index).ToString();
+            if (nodeValue == null)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+            else
+            {
+                return nodeValue;
+            }
+        }
+
+        private SinglyLinkedListNode NodeAt(int index)
+        {
             SinglyLinkedListNode currentNode = firstNode;
             for (int i = 0; i <= index; i++)
             {
@@ -100,7 +137,7 @@ namespace SinglyLinkedLists
                 }
                 if (i == index)
                 {
-                    return currentNode.Value.ToString();
+                    return currentNode;
                 }
                 currentNode = currentNode.Next;
             }
@@ -115,12 +152,49 @@ namespace SinglyLinkedLists
 
         public int IndexOf(string value)
         {
-            throw new NotImplementedException();
+            int position = -1;
+            if (firstNode != null)
+            {
+                SinglyLinkedListNode testNode = firstNode;
+                position++;
+                while (!testNode.IsLast())
+                {
+                    if (testNode.Value == value)
+                    {
+                        return position;
+                    }
+                    testNode = testNode.Next;
+                    position++;
+                }
+                if (testNode.Value == value)
+                {
+                    return position;
+                }
+                position = -1;
+            }
+            return position;
         }
 
         public bool IsSorted()
         {
-            throw new NotImplementedException();
+            bool sorted = false;
+            if (firstNode == null || firstNode.Next == null)
+            {
+                sorted = true;
+            }
+            else
+            {
+                SinglyLinkedListNode testNode = firstNode;
+                while (!testNode.IsLast())
+                {
+                    if (testNode.CompareTo(testNode.Next) <= 0)
+                    {
+                        sorted = true;
+                    }
+                    testNode = testNode.Next;
+                }
+            }
+            return sorted;
         }
 
         // HINT 1: You can extract this functionality (finding the last item in the list) from a method you've already written!
@@ -141,12 +215,36 @@ namespace SinglyLinkedLists
 
         public void Remove(string value)
         {
-            throw new NotImplementedException();
+            int toRemoveIndex = IndexOf(value);
+            if (toRemoveIndex >= 0)
+            {
+                SinglyLinkedListNode toRemove = NodeAt(toRemoveIndex);
+                if (toRemoveIndex == 0)
+                {
+                    firstNode = toRemove.Next;
+                }
+                else
+                {
+                    SinglyLinkedListNode previousNode = NodeAt(toRemoveIndex - 1);
+                    previousNode.Next = toRemove.Next;
+                }
+                toRemove.Next = null;
+            }
         }
 
         public void Sort()
         {
-            throw new NotImplementedException();
+            if (firstNode != null)
+            {
+                while (!IsSorted())
+                {
+                    SinglyLinkedListNode testNode = firstNode;
+                    if (testNode < testNode.Next)
+                    {
+
+                    }
+                }
+            }
         }
 
         public override string ToString()
