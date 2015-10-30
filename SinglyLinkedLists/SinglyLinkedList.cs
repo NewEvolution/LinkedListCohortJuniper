@@ -68,8 +68,7 @@ namespace SinglyLinkedLists
             }
             else
             {
-                SinglyLinkedListNode currentNode = LastNode();
-                currentNode.Next = newNode;
+                LastNode().Next = newNode;
             }
         }
 
@@ -177,7 +176,7 @@ namespace SinglyLinkedLists
 
         public bool IsSorted()
         {
-            bool sorted = false;
+            bool sorted = true;
             if (firstNode == null || firstNode.Next == null)
             {
                 sorted = true;
@@ -187,9 +186,9 @@ namespace SinglyLinkedLists
                 SinglyLinkedListNode testNode = firstNode;
                 while (!testNode.IsLast())
                 {
-                    if (testNode.CompareTo(testNode.Next) <= 0)
+                    if (testNode.CompareTo(testNode.Next) > 0)
                     {
-                        sorted = true;
+                        sorted = false;
                     }
                     testNode = testNode.Next;
                 }
@@ -202,15 +201,7 @@ namespace SinglyLinkedLists
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
         public string Last()
         {
-            if (firstNode == null)
-            {
-                return null;
-            }
-            else
-            {
-                SinglyLinkedListNode currentNode = LastNode();
-                return currentNode.Value.ToString();
-            }
+            return firstNode == null ? null : LastNode().Value.ToString();
         }
 
         public void Remove(string value)
@@ -228,7 +219,6 @@ namespace SinglyLinkedLists
                     SinglyLinkedListNode previousNode = NodeAt(toRemoveIndex - 1);
                     previousNode.Next = toRemove.Next;
                 }
-                toRemove.Next = null;
             }
         }
 
@@ -236,12 +226,23 @@ namespace SinglyLinkedLists
         {
             if (firstNode != null)
             {
+                SinglyLinkedListNode testNode = firstNode;
                 while (!IsSorted())
                 {
-                    SinglyLinkedListNode testNode = firstNode;
-                    if (testNode < testNode.Next)
+                    if (testNode > testNode.Next)
                     {
-
+                        AddAfter(testNode.Next.ToString(), testNode.ToString());
+                        string removal = testNode.ToString();
+                        testNode = testNode.Next;
+                        Remove(removal);
+                    }
+                    else
+                    {
+                        testNode = testNode.Next;
+                    }
+                    if (testNode == null)
+                    {
+                        testNode = firstNode;
                     }
                 }
             }
