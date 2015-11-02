@@ -177,10 +177,7 @@ namespace SinglyLinkedLists
         public bool IsSorted()
         {
             bool sorted = true;
-            if (firstNode == null || firstNode.Next == null)
-            {
-                sorted = true;
-            }
+            if (firstNode == null || firstNode.Next == null) { }
             else
             {
                 SinglyLinkedListNode testNode = firstNode;
@@ -201,7 +198,7 @@ namespace SinglyLinkedLists
         // HINT 3: If you highlight code and right click, you can use the refactor menu to extract a method for you...
         public string Last()
         {
-            return firstNode == null ? null : LastNode().Value.ToString();
+            return firstNode == null ? null : LastNode().ToString();
         }
 
         public void Remove(string value)
@@ -229,9 +226,16 @@ namespace SinglyLinkedLists
                 SinglyLinkedListNode testNode = firstNode;
                 while (!IsSorted())
                 {
-                    if (testNode > testNode.Next)
+                    if (testNode.CompareTo(testNode.Next) > 0)
                     {
-                        AddAfter(testNode.Next.ToString(), testNode.ToString());
+                        if (testNode.Next.IsLast())
+                        {
+                            AddLast(testNode.ToString());
+                        }
+                        else
+                        {
+                            AddAfter(testNode.Next.ToString(), testNode.ToString());
+                        }
                         string removal = testNode.ToString();
                         testNode = testNode.Next;
                         Remove(removal);
@@ -240,7 +244,7 @@ namespace SinglyLinkedLists
                     {
                         testNode = testNode.Next;
                     }
-                    if (testNode == null)
+                    if (testNode.IsLast())
                     {
                         testNode = firstNode;
                     }
@@ -250,18 +254,19 @@ namespace SinglyLinkedLists
 
         public override string ToString()
         {
-            string builtString = " ";
+            StringBuilder builtString = new StringBuilder("{ ");
             if (firstNode != null)
             {
                 SinglyLinkedListNode testNode = firstNode;
                 while (!testNode.IsLast())
                 {
-                    builtString += "\"" + testNode.Value.ToString() + "\", ";
+                    builtString.Append("\"").Append(testNode.ToString()).Append("\", ");
                     testNode = testNode.Next;
                 }
-                builtString += "\"" + testNode.Value.ToString() + "\" ";
+                builtString.Append("\"").Append(testNode.ToString()).Append("\" ");
             }
-            return "{" + builtString + "}";
+            builtString.Append("}");
+            return builtString.ToString();
         }
 
         public string[] ToArray()

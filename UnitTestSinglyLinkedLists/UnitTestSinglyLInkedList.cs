@@ -410,6 +410,13 @@ namespace UnitTestSinglyLinkedLists
         }
 
         [TestMethod]
+        public void IsSortedOnLongerListWithDuplicates()
+        {
+            SinglyLinkedList list = new SinglyLinkedList("bar", "bar", "foo", "grille");
+            Assert.IsTrue(list.IsSorted());
+        }
+
+        [TestMethod]
         public void IsSortedOnUnsortedList()
         {
             SinglyLinkedList list = new SinglyLinkedList("foo", "bar");
@@ -421,6 +428,20 @@ namespace UnitTestSinglyLinkedLists
         {
             SinglyLinkedList list = new SinglyLinkedList("bar", "foo");
             Assert.IsTrue(list.IsSorted());
+        }
+
+        [TestMethod]
+        public void IsSortedOnLongerSortedList()
+        {
+            SinglyLinkedList list = new SinglyLinkedList("bar", "foo", "grille");
+            Assert.IsTrue(list.IsSorted());
+        }
+
+        [TestMethod]
+        public void IsSortedOnLongerUnsortedList()
+        {
+            SinglyLinkedList list = new SinglyLinkedList("foo", "bar", "cat", "ark");
+            Assert.IsFalse(list.IsSorted());
         }
 
         // This test is primarily to ensure that attempting to sort an empty list doesn't throw any exceptions
@@ -457,6 +478,24 @@ namespace UnitTestSinglyLinkedLists
             SinglyLinkedList list = new SinglyLinkedList("bar", "cat", "foo", "grille");
             list.Sort();
             var expected = new string[] { "bar", "cat", "foo", "grille" };
+            CollectionAssert.AreEqual(expected, list.ToArray());
+        }
+
+        [TestMethod]
+        public void SortThreeList()
+        {
+            SinglyLinkedList list = new SinglyLinkedList("foo", "bar", "grille");
+            list.Sort();
+            var expected = new string[] { "bar", "foo", "grille" };
+            CollectionAssert.AreEqual(expected, list.ToArray());
+        }
+
+        [TestMethod]
+        public void SortFourList()
+        {
+            SinglyLinkedList list = new SinglyLinkedList("foo", "ham", "bar", "grille");
+            list.Sort();
+            var expected = new string[] { "bar", "foo", "grille", "ham" };
             CollectionAssert.AreEqual(expected, list.ToArray());
         }
 
