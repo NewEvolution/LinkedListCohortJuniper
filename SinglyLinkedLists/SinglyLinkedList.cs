@@ -154,7 +154,7 @@ namespace SinglyLinkedLists
             }
         }
 
-        public void Sort()
+        public void Sort() // bubble sort
         {
             if (firstNode != null)
             {
