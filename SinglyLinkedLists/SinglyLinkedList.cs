@@ -22,6 +22,7 @@ namespace SinglyLinkedLists
         public string this[int i]
         {
             get { return ElementAt(i); }
+            // Only because nodes can only contain a single string, more complex nodes would require replacement.
             set { NodeAt(i).Value = value; }
         }
 
