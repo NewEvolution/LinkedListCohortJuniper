@@ -72,12 +72,11 @@ namespace SinglyLinkedLists
             if (currentNode == null) return count;
             else
             {
-                while (!currentNode.IsLast())
+                while (currentNode != null)
                 {
                     currentNode = currentNode.Next;
                     count++;
                 }
-                count++;
             }
             return count;
         }
@@ -117,13 +116,12 @@ namespace SinglyLinkedLists
             {
                 position++;
                 SinglyLinkedListNode testNode = firstNode;
-                while (!testNode.IsLast())
+                while (position < Count())
                 {
                     if (testNode.Value == value) return position;
                     testNode = testNode.Next;
                     position++;
                 }
-                if (testNode.Value == value) return position;
                 position = -1;
             }
             return position;
