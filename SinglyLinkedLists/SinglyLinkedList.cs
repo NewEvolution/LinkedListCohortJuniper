@@ -228,17 +228,10 @@ namespace SinglyLinkedLists
                 {
                     if (testNode.CompareTo(testNode.Next) > 0)
                     {
-                        if (testNode.Next.IsLast())
-                        {
-                            AddLast(testNode.ToString());
-                        }
-                        else
-                        {
-                            AddAfter(testNode.Next.ToString(), testNode.ToString());
-                        }
-                        string removal = testNode.ToString();
+                        string testValue = testNode.ToString();
+                        testNode.Value = testNode.Next.Value;
+                        testNode.Next.Value = testValue;
                         testNode = testNode.Next;
-                        Remove(removal);
                     }
                     else
                     {
