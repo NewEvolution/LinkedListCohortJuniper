@@ -68,10 +68,10 @@ namespace SinglyLinkedLists
         public int Count()
         {
             int count = 0;
-            SinglyLinkedListNode currentNode = firstNode;
-            if (currentNode == null) return count;
+            if (firstNode == null) return count;
             else
             {
+                SinglyLinkedListNode currentNode = firstNode;
                 while (currentNode != null)
                 {
                     currentNode = currentNode.Next;
