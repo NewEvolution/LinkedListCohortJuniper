@@ -15,16 +15,10 @@ namespace SinglyLinkedLists
         private SinglyLinkedListNode next;
         public SinglyLinkedListNode Next
         {
-            get
-            {
-                return next;
-            }
+            get { return next; }
             set
             {
-                if(ReferenceEquals(value, this))
-                {
-                    throw new ArgumentException();
-                }
+                if (ReferenceEquals(value, this)) throw new ArgumentException();
                 next = value;
             }
         }
