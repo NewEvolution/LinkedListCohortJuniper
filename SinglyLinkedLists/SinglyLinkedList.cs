@@ -15,6 +15,7 @@ namespace SinglyLinkedLists
         // READ: http://msdn.microsoft.com/en-us/library/aa691335(v=vs.71).aspx
         public SinglyLinkedList(params object[] values)
         {
+            count = 0;
             foreach (object nodeValue in values) AddLast(nodeValue as string);
         }
 
@@ -37,6 +38,7 @@ namespace SinglyLinkedLists
                     SinglyLinkedListNode newNode = new SinglyLinkedListNode(value);
                     newNode.Next = testNode.Next;
                     testNode.Next = newNode;
+                    count++;
                     break;
                 }
                 testNode = testNode.Next;
@@ -48,6 +50,7 @@ namespace SinglyLinkedLists
             SinglyLinkedListNode newNode = new SinglyLinkedListNode(value);
             newNode.Next = firstNode;
             firstNode = newNode;
+            count++;
         }
 
         public void AddLast(string value)
@@ -55,6 +58,7 @@ namespace SinglyLinkedLists
             SinglyLinkedListNode newNode = new SinglyLinkedListNode(value);
             if (firstNode == null) firstNode = newNode;
             else LastNode().Next = newNode;
+            count++;
         }
 
         private SinglyLinkedListNode LastNode()
@@ -65,21 +69,8 @@ namespace SinglyLinkedLists
         }
 
         // NOTE: There is more than one way to accomplish this.  One is O(n).  The other is O(1).
-        public int Count()
-        {
-            int count = 0;
-            if (firstNode == null) return count;
-            else
-            {
-                SinglyLinkedListNode currentNode = firstNode;
-                while (currentNode != null)
-                {
-                    currentNode = currentNode.Next;
-                    count++;
-                }
-            }
-            return count;
-        }
+        private int count;
+        public int Count() { return count; }
 
         public string ElementAt(int index)
         {
@@ -163,6 +154,7 @@ namespace SinglyLinkedLists
                     SinglyLinkedListNode previousNode = NodeAt(toRemoveIndex - 1);
                     previousNode.Next = toRemove.Next;
                 }
+                count--;
             }
         }
 
