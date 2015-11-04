@@ -117,7 +117,7 @@ namespace SinglyLinkedLists
         public bool IsSorted()
         {
             bool sorted = true;
-            if (firstNode == null || firstNode.Next == null) { }
+            if (count < 2) { }
             else
             {
                 SinglyLinkedListNode testNode = firstNode;
