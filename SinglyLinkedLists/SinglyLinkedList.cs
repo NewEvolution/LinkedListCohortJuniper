@@ -165,10 +165,7 @@ namespace SinglyLinkedLists
 
         public void Sort()
         {
-            if (count == 0)
-            {
-                return;
-            }
+            if (count == 0) return;
             SinglyLinkedListNode previous = null;
             SinglyLinkedListNode current = firstNode;
             SinglyLinkedListNode next = firstNode.Next;
@@ -184,23 +181,14 @@ namespace SinglyLinkedLists
                 current = next;
                 next = current.Next;
             }
-            if (swapOccurred)
-            {
-                Sort();
-            }
+            if (swapOccurred) Sort();
         }
 
         private void SwapWithNext(SinglyLinkedListNode previous, SinglyLinkedListNode swapee)
         {
             SinglyLinkedListNode swapWith = swapee.Next;
-            if (previous == null)
-            {
-                firstNode = swapWith;
-            }
-            else
-            {
-                previous.Next = swapWith;
-            }
+            if (previous == null) firstNode = swapWith;
+            else previous.Next = swapWith;
             swapee.Next = swapWith.Next;
             swapWith.Next = swapee;
         }
