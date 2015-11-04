@@ -154,14 +154,23 @@ namespace SinglyLinkedLists
             }
         }
 
+        public void BuildSort()
+        {
+            if (!IsSorted())
+            {
+                SinglyLinkedList sortedList = new SinglyLinkedList(firstNode.Value);
+
+            }
+        }
+
         public void Sort() // bubble sort
         {
-            if (firstNode != null)
+            if (!IsSorted())
             {
                 SinglyLinkedListNode testNode = firstNode;
                 while (!IsSorted())
                 {
-                    if (testNode.CompareTo(testNode.Next) > 0)
+                    if (testNode > testNode.Next)
                     {
                         string testValue = testNode.ToString();
                         testNode.Value = testNode.Next.Value;
