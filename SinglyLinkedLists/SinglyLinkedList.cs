@@ -163,24 +163,46 @@ namespace SinglyLinkedLists
             }
         }
 
-        public void Sort() // bubble sort
+        public void Sort()
         {
-            if (!IsSorted())
+            if (count == 0)
             {
-                SinglyLinkedListNode testNode = firstNode;
-                while (!IsSorted())
-                {
-                    if (testNode > testNode.Next)
-                    {
-                        string testValue = testNode.ToString();
-                        testNode.Value = testNode.Next.Value;
-                        testNode.Next.Value = testValue;
-                        testNode = testNode.Next;
-                    }
-                    else testNode = testNode.Next;
-                    if (testNode.IsLast()) testNode = firstNode;
-                }
+                return;
             }
+            SinglyLinkedListNode previous = null;
+            SinglyLinkedListNode current = firstNode;
+            SinglyLinkedListNode next = firstNode.Next;
+            bool swapOccurred = false;
+            while (next != null)
+            {
+                if (current > next)
+                {
+                    SwapWithNext(previous, current);
+                    swapOccurred = true;
+                }
+                previous = current;
+                current = next;
+                next = current.Next;
+            }
+            if (swapOccurred)
+            {
+                Sort();
+            }
+        }
+
+        private void SwapWithNext(SinglyLinkedListNode previous, SinglyLinkedListNode swapee)
+        {
+            SinglyLinkedListNode swapWith = swapee.Next;
+            if (previous == null)
+            {
+                firstNode = swapWith;
+            }
+            else
+            {
+                previous.Next = swapWith;
+            }
+            swapee.Next = swapWith.Next;
+            swapWith.Next = swapee;
         }
 
         public override string ToString()
